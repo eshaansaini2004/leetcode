@@ -4,7 +4,7 @@ Welcome to my LeetCode problem-solving repository! This is where I track my prog
 
 ## 📊 Progress Overview
 
-- **Total Problems Solved**: 2
+- **Total Problems Solved**: 4
 - **Language**: Python
 
 ## 🎯 Goals
