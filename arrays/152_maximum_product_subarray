@@ -1,0 +1,28 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        '''
+        at each iternation the max can only be n, curmax * n or curmin * n 
+        similarly curmin can only be n, curmax * n or curmin * n 
+        res = max(res,curmax)
+        '''
+
+        if len(nums) == 1:
+            return nums[0]
+        maxn = 1
+        minn = 1
+        totalmax = max(nums)
+        for i in range(0,len(nums)):
+            
+            if nums[i] == 0:
+                maxn = 1
+                minn = 1
+                continue
+            tempmax = maxn
+            maxn = max(nums[i], max(nums[i]*maxn, nums[i] * minn))
+            minn = min(nums[i],min(nums[i] * tempmax,nums[i] * minn))
+           
+            totalmax = max(maxn,totalmax)
+            
+        return totalmax
+
+        
