@@ -1,0 +1,56 @@
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        '''
+        Method 1: Top-Down Recursive with Memoization (O(N^2) Time, O(N^2) Space)
+        
+        This approach goes over the premise that for every index, we decide to either 
+        include it in the subsequence (if valid based on previous) or exclude it.
+        
+        We store/memoize the result for each state (prev_index, curr_index) so that 
+        if we reach that state again, we can just fetch from the cache.
+        
+        Note: If we only used 'curr_index' for the dp cache in this solution, 
+        it could possibly use an old, incorrect answer derived from a different 'prev_index'.
+        Because the state space is N*N, this leads to Memory Limit Exceeded on large inputs.
+        '''
+        # dp = {}
+        # def dfs(j,i):
+        #     if (j,i) in dp:
+        #         return dp[(j,i)]
+        #     if i >= len(nums):
+        #         return 0
+        #     include = 0
+        #     exclude = 0
+        #     if j == - 1 or nums[j] < nums[i]:
+        #         include = 1+dfs(i,i+1)
+        #     exclude = dfs(j,i+1)
+        #     dp[(j,i)] = max(include,exclude)
+        #     return max(include,exclude)
+        # return dfs(-1,0)
+
+        '''
+         Method 2: Bottom-Up Iterative Tabulation (O(N^2) Time, O(N) Space)
+        
+        This approach changes the definition of dp[i]. 
+        dp[i] represents the length of the LIS that explicitly ENDS at index i.
+        
+        Base Case: Every element is an LIS of length 1 by itself, so initialize dp array with 1s.
+        
+        Logic: To calculate dp[i], we look at all previous indices j (from 0 to i-1).
+        If nums[i] > nums[j], we can extend the LIS ending at j. 
+        We want to find the j that gives us the maximum length (max(dp[j]) + 1).
+        
+        Final Answer: The LIS could end at any index, so we return the maximum value in the dp array.
+        '''
+        dp=[1]*len(nums)
+        for i in range(1,len(nums)):
+            maxval = 1
+            for j in range(0,i):
+                if nums[j] < nums[i] and dp[j]+1 > maxval:
+                    maxval = dp[j]+1
+            dp[i] = maxval    
+        return max(dp) 
+
+
+        
+        
