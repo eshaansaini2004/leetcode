@@ -1,0 +1,52 @@
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+
+        '''
+        so basically we need to have a memeory of index and then cursum tracking 
+        look at neetcodes hints for this problem
+        '''
+
+        # if sum(nums)%2==1:
+        #     return False
+        # target = sum(nums)//2
+        # dp = {}
+        # def dfs(i,cursum):
+        #     if i >= len(nums) or cursum > target:
+        #         return False
+        #     if (i,cursum) in dp:
+        #         return dp[(i,cursum)]
+        #     if cursum+nums[i]==target:
+        #         return True
+        #     include = False
+        #     if cursum+nums[i] < target:
+        #         include = dfs(i+1,cursum+nums[i])
+        #     exclude = dfs(i+1,cursum) 
+        #     dp[(i,cursum)]= include or exclude
+        #     return include or exclude
+        
+        # return dfs(0,0)
+
+        # same thing but this is array so less space ? cuz i am failing last memeory space 
+        # YES ARRAY USES LESS MEMORY
+        total = sum(nums)
+        if total % 2 != 0:
+            return False
+
+        target = total // 2
+        n = len(nums)
+        memo = [[-1] * (target + 1) for _ in range(n + 1)]
+
+        def dfs(i, target):
+            if target == 0:
+                return True
+            if i >= n or target < 0:
+                return False
+            if memo[i][target] != -1:
+                return memo[i][target]
+
+            memo[i][target] = (dfs(i + 1, target) or
+                               dfs(i + 1, target - nums[i]))
+            return memo[i][target]
+
+        return dfs(0, target)
+        
