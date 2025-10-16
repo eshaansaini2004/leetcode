@@ -1,0 +1,20 @@
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        '''
+        recurrencece = cost[i] + min(dfs(i+1), dfs(i+2))
+            base case = i >= len(cost) -> we return 0 
+        in the main code we return dp[0] or dp[1] cuz we can start at index 1 or 0  
+        '''
+
+        dp = [-1]*(len(cost))
+        def dfs(i):
+            if i >= len(cost):
+                return 0
+            if dp[i]!=-1:
+                return dp[i]
+            dp[i] = cost[i] + min(dfs(i+1),dfs(i+2))
+            return dp[i]
+        dfs(0)
+        return min(dp[0],dp[1])
+            
+            
