@@ -1,0 +1,43 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if head is None or head.next is None:
+            return False
+        '''
+        ineffiecnt solution 
+        even though O(1) looup in hashmap we take o(n) space 
+        can we take lesser space?
+        '''
+        # m = {}
+        # temp = head
+        # index = 0
+        # while temp is not None:
+        #     if temp not in m.values():
+        #         m[index] = temp
+        #         temp = temp.next
+        #         index+=1
+        #     else:
+        #         return True
+        # return False
+        '''
+        fast slow method
+        you ahve two pointers 
+        one that goes one at a time and one that goes two at a time 
+        if there is a cycle then they will ahv eto meet , if not then fast or fast.next is none
+        '''
+        slow = head
+        fast = head
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+            if fast == slow:
+                return True
+            
+        if fast is None or fast.next is None:
+            return False
+        
