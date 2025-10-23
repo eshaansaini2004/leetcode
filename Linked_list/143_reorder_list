@@ -1,0 +1,20 @@
+list_nodes = []
+        temp = head
+        while temp is not None:
+            list_nodes.append(temp)
+            temp = temp.next
+        
+        i = 0 
+        j = len(list_nodes)-1
+        while i < j:
+            list_nodes[i].next = list_nodes[j]
+            i+=1
+            if i>=j: # if we do not have this then we hav a cycle as in the next line the 
+                        # the node would point to itself
+                break
+            list_nodes[j].next = list_nodes[i]
+            j-=1
+        
+        list_nodes[i].next = None # this is the last element so we need to make sure to change
+                                        #what it is pointing to to prevent cycles
+
