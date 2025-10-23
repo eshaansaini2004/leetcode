@@ -9,7 +9,7 @@ Welcome to my LeetCode problem-solving repository! This is where I track my prog
 
 ## 🎯 Goals
 
-- [ ] Solve the blind 75 then move on to Neetcode 150
+- [ ] Solve various LeetCode problems across different difficulty levels
 - [ ] Master dynamic programming patterns
 - [ ] Improve time and space complexity analysis
 - [ ] Cover all major algorithm categories
