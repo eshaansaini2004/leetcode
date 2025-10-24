@@ -1,0 +1,30 @@
+class Solution:
+    def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
+        '''
+        so basically the though procress in here si that the elements on the same diagonal have the same row+col 
+        so masically store all elements with same row+col in a map as a list as value and row+col as key
+        then we get each go thru each row+col and add their respective list to result
+        if row+col is even the we reverse list and add to the result
+        '''
+        m ={}
+        for i in range(len(mat)):
+            for j in range(len(mat[0])):
+                if i+j not in m:
+                    m[i+j] = [mat[i][j]]
+                else:
+                    m[i+j].append(mat[i][j])
+        
+        ans = []
+        for key,val in m.items():
+			#each entry looks like (diagonal level (sum of indices), [elem1, elem2, elem3, ...])
+			#snake time, look at the diagonal level
+            if key % 2 == 0:
+				#Here we append in reverse order because its an even numbered level/diagonal.
+                val = val[::-1] 
+                for x in val:
+                    ans.append(x)
+            else:
+                for x in val:
+                    ans.append(x)
+        return ans
+
