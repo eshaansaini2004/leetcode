@@ -1,0 +1,26 @@
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+
+        it is jsut transpose and reverse
+
+        i mean i could just make another matrix and then jsut iternate thought the orignal matrix and do it yea that sounds good  
+        """
+        for i in range(len(matrix)):
+            for j in range(i,len(matrix)):
+                lol = matrix[i][j]
+                matrix[i][j] = matrix[j][i]
+                matrix[j][i] = lol
+        temp = []
+        for i in range(len(matrix)):
+            temp1 =list(reversed(matrix[i]))
+            temp.append(temp1)
+        print(temp)
+        
+        for i in range(len(matrix)):
+            for j in range(len(matrix)):
+                matrix[i][j] = temp[i][j]
+
+            
+        
