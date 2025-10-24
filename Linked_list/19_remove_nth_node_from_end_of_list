@@ -1,0 +1,43 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+
+        '''
+        basically calcuate the size and the calculate index from front and idx = size -n 
+        check case of size == 1 
+        and idx == 0 and i == 0 
+        or else just while loop and store prev and when i == idx do the cahnge and break/return
+
+        '''
+        size = 0 
+        temp = head
+        # calculating size
+        while temp is not None:
+            size+=1
+            temp = temp.next
+        
+        #calculating index we wanna remove at adn we use 0 based indexing 
+        idx = size - n 
+        i = 0 
+        temp = head
+        if size == 1:
+            # size is 1 so only one node to remove lol
+            return None
+        if i == 0 and idx == 0: # this is for the case where we wanna remove ehad so there is no previous
+            head = head.next
+            return head
+
+            #loop if all toher cases do not worka dn remove the node 
+        while temp is not None:
+            if i == idx:
+                prev.next = temp.next
+            prev = temp
+            temp = temp.next
+            i+=1
+        return head
+
+        
