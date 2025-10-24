@@ -1,0 +1,56 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        if len(matrix) == 0:
+            return []
+        total = len(matrix)*len(matrix[0])
+        rup = 0
+        rdown = len(matrix)-1
+        cleft = 0 
+        cright = len(matrix[0])-1
+        ret = []
+        count = 0
+        check = False
+        while True:
+            for j in range(cleft,cright+1):
+                ret.append(matrix[rup][j])
+                count+=1
+                if count == total:
+                    check = True
+                    break
+            if check:
+                break
+            
+            for i in range(rup+1,rdown+1):
+                ret.append(matrix[i][cright])
+                count+=1
+                if count == total:
+                    check = True
+                    break
+            if check:
+                break
+            
+            for j in range(cright-1,cleft-1,-1):
+                ret.append(matrix[rdown][j])
+                count+=1
+                if count == total:
+                    check = True
+                    break
+            if check:
+                break
+            
+            for i in range(rdown-1,rup,-1):
+                ret.append(matrix[i][cleft])
+                count+=1
+                if count == total:
+                    check = True
+                    break
+            if check:
+                break
+            
+            rup+=1
+            cleft+=1
+            rdown-=1
+            cright-=1
+        
+        return ret
+        
