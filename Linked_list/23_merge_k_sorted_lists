@@ -1,0 +1,75 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+
+
+
+        '''
+        first leetcode hard  solution 
+        '''
+
+        if len(lists) == 0:
+            return None
+        if len(lists) ==1:
+            if lists[0] == None:
+                return None
+            else:
+                return lists[0]
+        # iternate thru each list acces the first element and then comapre 
+            # whichever list head is chosen remove the head from that list and 
+                #continue unitl all lists are empty ?
+        # brute force 1
+        # idx = 0
+        # head = None
+        # while True:
+        #     heads = []
+        #     for i in range(len(lists)):
+        #         if lists[i] is not None:
+        #             heads.append((lists[i].val,i))
+        #     # need to find the min based
+        #     if len(heads) == 0:
+        #         break
+        #     if (len(heads))==1:
+        #         min_tuple = heads[0]
+        #     else:
+        #         min_tuple = min(heads, key=lambda x: x[0])
+        #     index = min_tuple[1]
+        #     value = min_tuple[0]
+        #     if idx == 0 :
+                
+        #         node = ListNode(value)
+        #         head = node
+        #         prev = node
+        #     else:
+        #         node = ListNode(value)
+        #         prev.next = node 
+        #         prev = node
+        #     idx+=1
+        #     lists[index] = lists[index].next
+        # return head
+
+        #solution 2
+        final = []
+        for l in lists:
+            temp = l
+            while temp is not None:
+                final.append(temp.val)
+                temp = temp.next
+        if len(final) == 0 :
+            return None
+        final.sort()
+       
+        head = ListNode(final[0])
+        temp = head
+        for i in range(1,len(final)):
+            temp.next = ListNode(final[i])
+            temp = temp.next
+        return head
+
+
+
+        
