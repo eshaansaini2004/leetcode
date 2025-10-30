@@ -1,0 +1,44 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
+
+from typing import Optional
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        '''
+        perform dfs/bfs unitl you traverse all the nodes and creates nwe nodes adn store in a list/hashmap?
+        Then we make a adjacency list for each node ?
+
+        so this is an undirected grpah so edges boht ways 
+        
+        another solution could be to map the old nodes to new nodes in hashmap
+        then perform dfs 
+            if node has mapping in hashmap then just return that node 
+            else we add a mapping 
+                and the we iternate through neighbord and append the node returned by dfs(eachnieghbour)
+        '''
+        if node is None:
+            return None
+        old_new={}
+        def dfs(n):
+            # base case
+            if n in old_new:
+                return old_new[n]
+            
+            #we create a mapping
+            old_new[n] = Node(n.val)
+
+            #we go through all the neighbours
+            for nd in n.neighbors: 
+                old_new[n].neighbors.append(dfs(nd))
+                #if the neighbour exists dfs(nd) will just return the node immediately and we will append it to our list
+                # if not then it will perform dfs and on the node and eventually return 
+            return old_new[n]
+        return dfs(node)
+       
+        
+        
